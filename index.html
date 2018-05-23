@@ -1,18 +1,76 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<script src="js/mail-generator.js"></script>
 		<link href="css/style.css" rel="stylesheet" media="screen">
-    <script>
-      window.onload = function(){
-        // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
-        // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
-        
-      };
-    </script>
+
+	    <script>
+	      window.onload = function(){
+	        // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
+	        // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
+	        
+	        //Geemails array is populated already after this code runs
+
+	        var msgElem = document.getElementById("message");
+	        var pElem = document.createElement("p");
+	        pElem.id = "date";
+	        pElem.innerHTML = geemails[1].date;
+	        msgElem.appendChild(pElem);
+	      };
+	    </script>
+
 	</head>
+	
 	<body>
-		<div class="container" id="main">
+		<header>
+			<div>
+				<h1 id="appName">Gee-Mail</h1>
+			</div>
+		</header>
+
+<!-- 		<div class="container" id="main">
 			Build Me!
 		</div>
+		 -->
+<!-- 		<section id="inbox">
+			Show an inbox count somewhere on the page to show the current number of messages in your inbox
+			
+			<div id="count">
+				<p></p>
+			</div>
+
+
+		</section> -->
+
+
+		<section class="content">
+			<!--Display messages here-->
+			<!--4. With this data you must make a visual list of mail messages on the page with the following minimum requirements.
+				* Each message should have it's own row showing:
+					* Date
+					* Sender
+					* Subject
+					* When clicking on a message you must provide some method of showing the message for that row.-->
+			<table>
+				<!--date - The date message was sent-->
+				<tr id="message">
+					<td id="date">Date</td>
+					<td id="sender">Sender</td>
+					<td id="subject">Subject</td>
+				</tr>
+			</table>
+		</section>
+
+
+
+
+
+
 	</body>
 </html>
+
+
+
+
+
+
