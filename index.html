@@ -11,12 +11,50 @@
 	        
 	        //Geemails array is populated already after this code runs
 
-	        var msgElem = document.getElementById("message");
-	        var pElem = document.createElement("p");
-	        pElem.id = "date";
-	        pElem.innerHTML = geemails[1].date;
-	        msgElem.appendChild(pElem);
+	        console.log(geemails);
+
+	        //Obtain parent of messages
+	        var inboxElem = document.getElementById("inbox");
+
+	        for(var i=0; i<geemails.length; i++){
+
+	        	//Create a new row for the new message
+		        var msgElem = document.createElement("tr");
+		        msgElem.className = "message";
+		        inboxElem.appendChild(msgElem);
+
+		        //Populate new msg with new date
+		        var dateElem = document.createElement("td");
+		        dateElem.id = "date";
+		        dateElem.innerHTML = geemails[i].date;
+		        msgElem.appendChild(dateElem);
+
+		        //Populate new msg with new sender
+		        var senderElem = document.createElement("td");
+		        senderElem.id = "sender";
+		        senderElem.innerHTML = geemails[i].sender;
+		        msgElem.appendChild(senderElem);
+
+		        //Populate new msg with new subject
+		       	var subjectElem = document.createElement("td");
+		        subjectElem.id = "subject";
+		        subjectElem.innerHTML = geemails[i].subject;
+		        msgElem.appendChild(subjectElem);
+		        
+	        }
+
+	        //When clicking on a message you must provide some method of showing the message for that row
+	        // var subjectSelector = this.querySelectorAll(".subject")[0];
+	        // if(subjectSelector.style.display === "none"){
+	        // 	subjectSelector.style.display = "block";
+	        // }
+	        // else
+	        // 	subjectSelector.style.display = "none";
+
+
+
 	      };
+
 	    </script>
 
 	</head>
@@ -51,13 +89,13 @@
 					* Sender
 					* Subject
 					* When clicking on a message you must provide some method of showing the message for that row.-->
-			<table>
+			<table id=inbox>
 				<!--date - The date message was sent-->
-				<tr id="message">
+<!-- 				<tr id="message">
 					<td id="date">Date</td>
 					<td id="sender">Sender</td>
 					<td id="subject">Subject</td>
-				</tr>
+				</tr> -->
 			</table>
 		</section>
 
