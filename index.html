@@ -40,8 +40,31 @@
 		        subjectElem.id = "subject";
 		        subjectElem.innerHTML = geemails[i].subject;
 		        msgElem.appendChild(subjectElem);
-		        
+
+		        var bodyElem = document.createElement("p");
+		        bodyElem.id = "body";
+		        bodyElem.innerHTML = geemails[i].body;
+		        msgElem.appendChild(bodyElem);
+
+
 	        }
+
+				var msgClick = document.getElementsByClassName("message");
+
+				for(var j=0; j<msgClick.length; j++){
+					msgClick[j].addEventListener("click", toggle);
+				}
+
+				function toggle(){
+					var clickDate = this.querySelectorAll("#body")[0];
+					if(clickDate.style.display === "none")
+						clickDate.style.display = "block";
+					else
+						clickDate.style.display = "none";
+				}
+
+
+
 
 	        //When clicking on a message you must provide some method of showing the message for that row
 	        // var subjectSelector = this.querySelectorAll(".subject")[0];
