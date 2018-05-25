@@ -15,9 +15,6 @@
 	        //Obtain parent of messages
 	        var inboxElem = document.getElementById("inboxTable");
 
-	        var count = document.getElementById("inboxCount");
-	        count.innerHTML = "Number of messages: " + geemails.length;
-
 	        for(var i=0; i<geemails.length; i++){
 
 	        	//Create a new row for the new message
@@ -50,7 +47,6 @@
 		        msgElem.appendChild(bodyElem);
 		        bodyElem.style.display = "none";
 
-
 	        }
 
 	        //Get message element, clicking anywhere on the message will show the body
@@ -58,7 +54,7 @@
 
 			//Add event listeners to each msg
 			for(var j=0; j<msgClick.length; j++){
-					msgClick[j].addEventListener("click", toggle);
+				msgClick[j].addEventListener("click", toggle);
 			}
 
 			//Function to Show/Hide the msg body
@@ -70,7 +66,49 @@
 					clicked.style.display = "none";
 			}
 
-	      };
+			var count = document.getElementById("inboxCount");
+	        count.innerHTML = "Number of messages: " + geemails.length;
+
+
+			setInterval(function(){
+				var newMsg = getNewMessage();
+				geemails.push(newMsg);
+				var count2 = geemails.length;
+				console.log("new msg length: "+ count2);
+
+
+				//Insert the new message as a new row at the bottom of the table
+				var addedRow = inboxElem.insertRow(-1);
+
+				//Populate the added row's date
+				var dateElem2 = addedRow.insertCell(0);
+				dateElem2.innerHTML = geemails[count2-1].date;
+
+				//Populate the added row's sender
+				var senderElem2 = addedRow.insertCell(1);
+				senderElem2.innerHTML = geemails[count2-1].sender;
+
+				//Populate the added row's subject
+				var subjectElem2 = addedRow.insertCell(2);
+				subjectElem2.innerHTML = geemails[count2-1].subject;
+
+				//Populate the added row's body
+				var bodyElem2 = addedRow.insertCell(3);
+				bodyElem2.id = "body";
+				bodyElem2.innerHTML = geemails[count2-1].body;
+				bodyElem2.style.display = "none";
+
+				addedRow.addEventListener("click", toggle);
+
+				count.innerHTML = "Number of messages: " + geemails.length;
+			},5000);
+
+
+
+
+	    };
+
+
 
 	    </script>
 
