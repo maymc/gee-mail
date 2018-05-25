@@ -10,11 +10,13 @@
 	        // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
 	        
 	        //Geemails array is populated already after this code runs
-
 	        console.log(geemails);
 
 	        //Obtain parent of messages
-	        var inboxElem = document.getElementById("inbox");
+	        var inboxElem = document.getElementById("inboxTable");
+
+	        var count = document.getElementById("inboxCount");
+	        count.innerHTML = "Number of messages: " + geemails.length;
 
 	        for(var i=0; i<geemails.length; i++){
 
@@ -41,7 +43,8 @@
 		        subjectElem.innerHTML = geemails[i].subject;
 		        msgElem.appendChild(subjectElem);
 
-		        var bodyElem = document.createElement("p");
+		        //Populate new msg with new body
+		        var bodyElem = document.createElement("td");
 		        bodyElem.id = "body";
 		        bodyElem.innerHTML = geemails[i].body;
 		        msgElem.appendChild(bodyElem);
@@ -50,32 +53,22 @@
 
 	        }
 
-				var msgClick = document.getElementsByClassName("message");
+	        //Get message element, clicking anywhere on the message will show the body
+			var msgClick = document.getElementsByClassName("message");
 
-				for(var j=0; j<msgClick.length; j++){
+			//Add event listeners to each msg
+			for(var j=0; j<msgClick.length; j++){
 					msgClick[j].addEventListener("click", toggle);
-				}
+			}
 
-				function toggle(){
-					var clickDate = this.querySelectorAll("#body")[0];
-					if(clickDate.style.display === "none")
-						clickDate.style.display = "block";
-					else
-						clickDate.style.display = "none";
-				}
-
-
-
-
-	        //When clicking on a message you must provide some method of showing the message for that row
-	        // var subjectSelector = this.querySelectorAll(".subject")[0];
-	        // if(subjectSelector.style.display === "none"){
-	        // 	subjectSelector.style.display = "block";
-	        // }
-	        // else
-	        // 	subjectSelector.style.display = "none";
-
-
+			//Function to Show/Hide the msg body
+			function toggle(){
+				var clicked = this.querySelectorAll("#body")[0];
+				if(clicked.style.display === "none")
+					clicked.style.display = "block";
+				else
+					clicked.style.display = "none";
+			}
 
 	      };
 
@@ -83,6 +76,7 @@
 
 	</head>
 	
+
 	<body>
 		<header>
 			<div>
@@ -90,37 +84,11 @@
 			</div>
 		</header>
 
-<!-- 		<div class="container" id="main">
-			Build Me!
-		</div>
-		 -->
-<!-- 		<section id="inbox">
-			Show an inbox count somewhere on the page to show the current number of messages in your inbox
-			
-			<div id="count">
-				<p></p>
-			</div>
-
-
-		</section> -->
-
+		<!--Show an inbox count to show the current number of messages in your inbox-->
+		<div id="inboxCount"></div>
 
 		<section class="content">
-			<!--Display messages here-->
-			<!--4. With this data you must make a visual list of mail messages on the page with the following minimum requirements.
-				* Each message should have it's own row showing:
-					* Date
-					* Sender
-					* Subject
-					* When clicking on a message you must provide some method of showing the message for that row.-->
-			<table id=inbox>
-				<!--date - The date message was sent-->
-<!-- 				<tr id="message">
-					<td id="date">Date</td>
-					<td id="sender">Sender</td>
-					<td id="subject">Subject</td>
-				</tr> -->
-			</table>
+			<table id=inboxTable></table>
 		</section>
 
 

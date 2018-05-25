@@ -1,3 +1,7 @@
-table, th, td{
-	border: solid;
+body{
+	font-size: 1.5em;
+}
+
+td {
+	border: 1px solid black;
 }
