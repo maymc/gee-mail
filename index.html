@@ -66,16 +66,24 @@
 					clicked.style.display = "none";
 			}
 
+			//Inbox count to show current number of messages in the inbox
 			var count = document.getElementById("inboxCount");
 	        count.innerHTML = "Number of messages: " + geemails.length;
 
+	        //Using setInterval to create a recurring function to generate new messages
+	        var recurringMsgs = setInterval(newMsg, 3000);
 
-			setInterval(function(){
+	        //A function that calls the existing "getNewMessage" function that returns a newly created message with the same properties as previous messages
+
+	        function newMsg(){
+
+	        	//Invoke the function to get a new message
 				var newMsg = getNewMessage();
+
+				//Push the new message into the geemail array
 				geemails.push(newMsg);
 				var count2 = geemails.length;
 				console.log("new msg length: "+ count2);
-
 
 				//Insert the new message as a new row at the bottom of the table
 				var addedRow = inboxElem.insertRow(-1);
@@ -98,13 +106,22 @@
 				bodyElem2.innerHTML = geemails[count2-1].body;
 				bodyElem2.style.display = "none";
 
+				//Make the message clickable to toggle
 				addedRow.addEventListener("click", toggle);
 
+				//Update the inbox message count
 				count.innerHTML = "Number of messages: " + geemails.length;
-			},5000);
+			}
 
+			//Function to stop the recurring getNewMessage function
+			function stopNewMsgs() {
+   				clearInterval(recurringMsgs);
+			}
 
-
+			//Create a stop button to stop the recurring getNewMessage function
+			var stopElem = document.getElementById("stopBtn");
+			stopElem.innerHTML = "Stop Messages";
+			stopElem.addEventListener("click", stopNewMsgs);
 
 	    };
 
@@ -124,6 +141,8 @@
 
 		<!--Show an inbox count to show the current number of messages in your inbox-->
 		<div id="inboxCount"></div>
+
+		<button id="stopBtn"></button>
 
 		<section class="content">
 			<table id=inboxTable></table>
