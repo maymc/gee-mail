@@ -3,6 +3,8 @@
 	<head>
 		<script src="js/mail-generator.js"></script>
 		<link href="css/style.css" rel="stylesheet" media="screen">
+		<link href="https://fonts.googleapis.com/css?family=Fascinate+Inline" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
 	    <script>
 	      window.onload = function(){
@@ -68,10 +70,10 @@
 
 			//Inbox count to show current number of messages in the inbox
 			var count = document.getElementById("inboxCount");
-	        count.innerHTML = "Number of messages: " + geemails.length;
+	        count.innerHTML = "Inbox (" + geemails.length +")";
 
 	        //Using setInterval to create a recurring function to generate new messages
-	        var recurringMsgs = setInterval(newMsg, 3000);
+	        var recurringMsgs = setInterval(newMsg, 10000);
 
 	        //A function that calls the existing "getNewMessage" function that returns a newly created message with the same properties as previous messages
 
@@ -110,7 +112,7 @@
 				addedRow.addEventListener("click", toggle);
 
 				//Update the inbox message count
-				count.innerHTML = "Number of messages: " + geemails.length;
+				count.innerHTML = "Inbox (" + geemails.length + ")";
 			}
 
 			//Function to stop the recurring getNewMessage function
@@ -140,12 +142,21 @@
 		</header>
 
 		<!--Show an inbox count to show the current number of messages in your inbox-->
+		<i class="far fa-envelope fa-3x"></i>
 		<div id="inboxCount"></div>
 
 		<button id="stopBtn"></button>
 
+		<br><br>
 		<section class="content">
-			<table id=inboxTable></table>
+			<table id=inboxTable>
+				<tr id="topRow">
+					<th id="dateTitle">Date</th>
+					<th id="senderTitle">Sender</th>
+					<th id="subjectTitle">Subject</th>
+					<th id="bodyTitle">Body</th>
+				</tr>
+			</table>
 		</section>
 
 
