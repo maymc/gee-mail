@@ -15,14 +15,14 @@
 	        console.log(geemails);
 
 	        //Obtain parent of messages
-	        var inboxElem = document.getElementById("inboxTable");
+	        var msgTableElem = document.getElementById("msgTable");
 
 	        for(var i=0; i<geemails.length; i++){
 
 	        	//Create a new row for the new message
 		        var msgElem = document.createElement("tr");
 		        msgElem.className = "message";
-		        inboxElem.appendChild(msgElem);
+		        msgTableElem.appendChild(msgElem);
 
 		        //Populate new msg with new date
 		        var dateElem = document.createElement("td");
@@ -52,16 +52,17 @@
 	        }
 
 	        //Get message element, clicking anywhere on the message will show the body
-			var msgClick = document.getElementsByClassName("message");
+			var clickedMsg = document.getElementsByClassName("message");
 
 			//Add event listeners to each msg
-			for(var j=0; j<msgClick.length; j++){
-				msgClick[j].addEventListener("click", toggle);
+			for(var j=0; j<clickedMsg.length; j++){
+				clickedMsg[j].addEventListener("click", toggle);
 			}
 
 			//Function to Show/Hide the msg body
 			function toggle(){
 				var clicked = this.querySelectorAll("#body")[0];
+				//var clicked = this.nextElementSibling;
 				if(clicked.style.display === "none")
 					clicked.style.display = "block";
 				else
@@ -69,8 +70,8 @@
 			}
 
 			//Inbox count to show current number of messages in the inbox
-			var count = document.getElementById("inboxCount");
-	        count.innerHTML = "Inbox (" + geemails.length +")";
+			var msgCount = document.getElementById("inboxCount");
+	        msgCount.innerHTML = "Inbox (" + geemails.length + ")";
 
 	        //Using setInterval to create a recurring function to generate new messages
 	        var recurringMsgs = setInterval(newMsg, 10000);
@@ -84,35 +85,35 @@
 
 				//Push the new message into the geemail array
 				geemails.push(newMsg);
-				var count2 = geemails.length;
-				console.log("new msg length: "+ count2);
+				var msgCount2 = geemails.length;
+				console.log("new msg length: "+ msgCount2);
 
 				//Insert the new message as a new row at the bottom of the table
-				var addedRow = inboxElem.insertRow(-1);
+				var addRow = msgTableElem.insertRow(-1);
 
 				//Populate the added row's date
-				var dateElem2 = addedRow.insertCell(0);
-				dateElem2.innerHTML = geemails[count2-1].date;
+				var dateElem2 = addRow.insertCell(0);
+				dateElem2.innerHTML = geemails[msgCount2-1].date;
 
 				//Populate the added row's sender
-				var senderElem2 = addedRow.insertCell(1);
-				senderElem2.innerHTML = geemails[count2-1].sender;
+				var senderElem2 = addRow.insertCell(1);
+				senderElem2.innerHTML = geemails[msgCount2-1].sender;
 
 				//Populate the added row's subject
-				var subjectElem2 = addedRow.insertCell(2);
-				subjectElem2.innerHTML = geemails[count2-1].subject;
+				var subjectElem2 = addRow.insertCell(2);
+				subjectElem2.innerHTML = geemails[msgCount2-1].subject;
 
 				//Populate the added row's body
-				var bodyElem2 = addedRow.insertCell(3);
+				var bodyElem2 = addRow.insertCell(3);
 				bodyElem2.id = "body";
-				bodyElem2.innerHTML = geemails[count2-1].body;
+				bodyElem2.innerHTML = geemails[msgCount2-1].body;
 				bodyElem2.style.display = "none";
 
 				//Make the message clickable to toggle
-				addedRow.addEventListener("click", toggle);
+				addRow.addEventListener("click", toggle);
 
 				//Update the inbox message count
-				count.innerHTML = "Inbox (" + geemails.length + ")";
+				msgCount.innerHTML = "Inbox (" + geemails.length + ")";
 			}
 
 			//Function to stop the recurring getNewMessage function
@@ -142,22 +143,23 @@
 		</header>
 
 		<!--Show an inbox count to show the current number of messages in your inbox-->
-		<i class="far fa-envelope fa-3x"></i>
-		<div id="inboxCount"></div>
+		<div class="sidebar">
+			<i class="far fa-envelope fa-3x"></i>
+			<div id="inboxCount"></div>
+			<br>
+			<button id="stopBtn"></button>
+		</div>
 
-		<button id="stopBtn"></button>
-
-		<br><br>
-		<section class="content">
-			<table id=inboxTable>
-				<tr id="topRow">
+		<div class="mail">
+			<table id=msgTable>
+				<tr id="description">
 					<th id="dateTitle">Date</th>
 					<th id="senderTitle">Sender</th>
 					<th id="subjectTitle">Subject</th>
 					<th id="bodyTitle">Body</th>
 				</tr>
 			</table>
-		</section>
+		</div>
 
 
 

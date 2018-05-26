@@ -2,20 +2,59 @@ body {
 	margin: 2em;
 	font-size: 1.2em;
 }
+
+/*header*/
 #appName {
 	margin: 0;
 	font-family: 'Fascinate Inline', cursive;
 	font-size: 4em;
+	padding-bottom: 50px;
+}
+
+.sidebar {
+	width: 15%;
+	float: left;
+	border: solid;
+	height: 500px;
+}
+
+.mail {
+	width: 80%;
+	float: right;
+	border: solid
 }
 
 #inboxCount {
 	display: inline-block;
+	font-size: 1.5em;
+}
+
+#stopBtn {
+	display: inline-block;
+	padding: 15px 25px;
+	font-size: 1.2em;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	color: #fff;
+	background-color: cornflowerblue;
+	border: none;
+	border-radius: 15px;
+	box-shadow: 0 5px gray;
+}
+
+#stopBtn:active {
+	background-color: gray;
+	box-shadow: 0 5px #666;
+	transform: translateY(4px);
 }
 
 
-#topRow {
+#dateTitle, #senderTitle, #subjectTitle, #bodyTitle {
 	text-align: left;
-
+	padding: 10px 10px;
+	border-bottom: 1px solid black;
 }
 
 table {
@@ -26,7 +65,7 @@ table {
 
 td {
 	border-bottom: 1px solid #ddd;
-	padding: 0;
+	padding: 10px 10px;
 	padding-right: 50px;
 	word-wrap
 	height: 50px;
