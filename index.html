@@ -74,10 +74,8 @@
 				var msgCount = document.getElementById("inboxCount");
 		        msgCount.innerHTML = "Inbox (" + geemails.length + ")";
 
-
-
 		        //Using setInterval to create a recurring function to generate new messages
-		        var recurringMsgs = setInterval(newMsg, 10000);
+		        var recurringMsgs = setInterval(newMsg, 5000);
 
 		        //A function that calls the existing "getNewMessage" function that returns a newly created message with the same properties as previous messages
 
@@ -92,7 +90,7 @@
 					console.log("new msg length: "+ msgCount2);
 
 					//Insert the new message as a new row at the bottom of the table
-					var addRow = msgTableElem.insertRow(-1);
+					var addRow = msgTableElem.insertRow(1);
 
 					//Populate the added row's date
 					var dateElem2 = addRow.insertCell(0);
