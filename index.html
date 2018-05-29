@@ -2,7 +2,6 @@
 <html>
 	<head>
 		<script src="js/mail-generator.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<link href="css/style.css" rel="stylesheet" media="screen">
 		<link href="https://fonts.googleapis.com/css?family=Fascinate+Inline|Julius+Sans+One|Open+Sans" rel="stylesheet">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
@@ -12,12 +11,10 @@
 				// ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
 				// We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
 
-				//Geemails array is populated already after this code runs
-				console.log(geemails);
-
-		        //Obtain parent of messages
+		        //Get table element for messages
 		        var msgTableElem = document.getElementById("msgTable");
 
+		        //Loop through geemails array and populate the table w/messages
 		        for(var i=0; i<geemails.length; i++){
 
 		        	//Create a new row for the new message
@@ -52,10 +49,9 @@
 
 		        }
 
-		        //Get message element, clicking anywhere on the message will show the body
+		        //Add an event listener to row. This allows user to click anywhere on the message to show the message.
 				var clickedMsg = document.getElementsByClassName("message");
 
-				//Add event listeners to each msg
 				for(var j=0; j<clickedMsg.length; j++){
 					clickedMsg[j].addEventListener("click", toggle);
 				}
@@ -70,47 +66,49 @@
 						clicked.style.display = "none";
 				}
 
-				//Inbox count to show current number of messages in the inbox
+				//Show number of messages in the inbox
 				var msgCount = document.getElementById("inboxCount");
 		        msgCount.innerHTML = "Inbox (" + geemails.length + ")";
 
-		        //Using setInterval to create a recurring function to generate new messages
-		        var recurringMsgs = setInterval(newMsg, 5000);
 
-		        //A function that calls the existing "getNewMessage" function that returns a newly created message with the same properties as previous messages
+		        /***** For new messages ******/
+
+		        //Set a recurring function to via the JavaScript `setInterval` function that will call our existing `getNewMessage` function that we have created for you that will return a newly created message with the same properties as your previous messages.
+		        var recurringMsgs = setInterval(newMsg, 5000);
 
 		        function newMsg(){
 
-		        	//Invoke the function to get a new message
+		        	//Invoke the getNewMessage function to get a new message
 					var newMsg = getNewMessage();
 
 					//Push the new message into the geemail array
 					geemails.push(newMsg);
-					var msgCount2 = geemails.length;
-					console.log("new msg length: "+ msgCount2);
 
-					//Insert the new message as a new row at the bottom of the table
+					// //Debug - check message count
+					// var msgCount2 = geemails.length;
+					// console.log("new msg length: "+ msgCount2);
+
+					//Insert the new message as a new row at the top of the table
 					var addRow = msgTableElem.insertRow(1);
 
-					//Populate the added row's date
+					//Populate the added row's date, sender, subject, and body
+					var newMsgData = geemails[geemails.length - 1];
+
 					var dateElem2 = addRow.insertCell(0);
-					dateElem2.innerHTML = geemails[msgCount2-1].date;
+					dateElem2.innerHTML = newMsgData.date;
 
-					//Populate the added row's sender
 					var senderElem2 = addRow.insertCell(1);
-					senderElem2.innerHTML = geemails[msgCount2-1].sender;
+					senderElem2.innerHTML = newMsgData.sender;
 
-					//Populate the added row's subject
 					var subjectElem2 = addRow.insertCell(2);
-					subjectElem2.innerHTML = geemails[msgCount2-1].subject;
+					subjectElem2.innerHTML = newMsgData.subject;
 
-					//Populate the added row's body
 					var bodyElem2 = addRow.insertCell(3);
 					bodyElem2.id = "body";
-					bodyElem2.innerHTML = geemails[msgCount2-1].body;
+					bodyElem2.innerHTML = newMsgData.body;
 					bodyElem2.style.display = "none";
 
-					//Make the message clickable to toggle
+					//Add an event listener to make the new messages clickable to show their msg
 					addRow.addEventListener("click", toggle);
 
 					//Update the inbox message count
@@ -135,15 +133,16 @@
 	<body>
 		<header>
 			<div>
-			<img src="http://www.stickpng.com/assets/images/584856bce0bb315b0f7675ad.png" alt="mailIcon">
+			<img src="http://www.stickpng.com/assets/images/584856bce0bb315b0f7675ad.png" alt="logo">
 				<h1 id="appName">Gee-Mail</h1>
 			</div>
 		</header>
 
-		<!--Show an inbox count to show the current number of messages in your inbox-->
 		<div class="sidebar">
+			<!--Inbox count to show number of messages -->
 			<i class="far fa-envelope fa-2x"></i><p id="inboxCount"></p>
 			<br>
+
 			<i class="far fa-paper-plane fa-2x"><p id="sent">Sent</p></i>
 			<br>
 			<i class="far fa-trash-alt fa-2x"><p id="trash">Trash</p></i>
@@ -152,11 +151,15 @@
 			<br>
 			<i class="far fa-comments fa-2x"><p id="chat">Chat</p></i>
 			<br><br>
+
+			<!--Stop button to stop new messages from being created -->
 			<button id="stopBtn"></button>
 		</div>
 
 		<div class="mail">
+			<!-- New messages displayed in a table -->
 			<table id=msgTable>
+				<!-- Table Header -->
 				<tr id="description">
 					<th id="dateTitle">Date</th>
 					<th id="senderTitle">Sender</th>
