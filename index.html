@@ -22,25 +22,22 @@
 			        msgElem.className = "message";
 			        msgTableElem.appendChild(msgElem);
 
-			        //Populate new msg with new date
+			        //Populate new msg with new date, sender, subject, and body
 			        var dateElem = document.createElement("td");
 			        dateElem.id = "date";
 			        dateElem.innerHTML = geemails[i].date;
 			        msgElem.appendChild(dateElem);
 
-			        //Populate new msg with new sender
 			        var senderElem = document.createElement("td");
 			        senderElem.id = "sender";
 			        senderElem.innerHTML = geemails[i].sender;
 			        msgElem.appendChild(senderElem);
 
-			        //Populate new msg with new subject
 			       	var subjectElem = document.createElement("td");
 			        subjectElem.id = "subject";
 			        subjectElem.innerHTML = geemails[i].subject;
 			        msgElem.appendChild(subjectElem);
 
-			        //Populate new msg with new body
 			        var bodyElem = document.createElement("td");
 			        bodyElem.id = "body";
 			        bodyElem.innerHTML = geemails[i].body;
@@ -49,7 +46,7 @@
 
 		        }
 
-		        //Add an event listener to row. This allows user to click anywhere on the message to show the message.
+		        //Add an event listener to each row. This allows user to click anywhere on the message to show the message.
 				var clickedMsg = document.getElementsByClassName("message");
 
 				for(var j=0; j<clickedMsg.length; j++){
@@ -143,7 +140,11 @@
 			<i class="far fa-envelope fa-2x"></i><p id="inboxCount"></p>
 			<br>
 
+			<i class="far fa-file-alt fa-2x"><p id="draft">Draft</p></i>
+			<br>
 			<i class="far fa-paper-plane fa-2x"><p id="sent">Sent</p></i>
+			<br>
+			<i class="far fa-times-circle fa-2x"><p id="spam">Spam</p></i>
 			<br>
 			<i class="far fa-trash-alt fa-2x"><p id="trash">Trash</p></i>
 			<br>
@@ -161,13 +162,15 @@
 			<table id=msgTable>
 				<!-- Table Header -->
 				<tr id="description">
-					<th id="dateTitle">Date</th>
-					<th id="senderTitle">Sender</th>
-					<th id="subjectTitle">Subject</th>
-					<th id="msgTitle">Message</th>
+					<th class="title">Date</th>
+					<th class="title">Sender</th>
+					<th class="title">Subject</th>
+					<th class="title">Message</th>
 				</tr>
 			</table>
 		</div>
+
+		<footer>Copyright &copy 2018 <br> by May Chen</footer>
 
 	</body>
 </html>

@@ -31,26 +31,29 @@ header {
 
 #inboxCount {
 	font-size: 1em;
+	font-family: 'Julius Sans One', sans-serif;
 	display: inline-block;
 	padding-left: 10px;
 }
 
-#sent, #contacts, #trash, #chat {
+#draft, #sent, #contacts, #spam, #trash, #chat {
 	font-size: 0.5em;
+	font-family: 'Julius Sans One', sans-serif;
 	display: inline-block;
 	padding-left: 10px;
 }
 
 #stopBtn {
+	font-size: 0.7em;
+	font-weight: bold;	
 	display: inline-block;
 	padding: 10px 20px;
-	font-size: 0.7em;
 	cursor: pointer;
 	text-align: center;
 	text-decoration: none;
 	outline: none;
-	color: #fff;
-	background-color: cornflowerblue;
+	color: black;
+	background-color: lightskyblue;
 	border: none;
 	border-radius: 15px;
 	box-shadow: 0 5px gray;
@@ -67,10 +70,9 @@ header {
 	margin-left: 10px;
 	width: 80%;
 	float: left;
-/*	border: solid;*/
 }
 
-#dateTitle, #senderTitle, #subjectTitle, #msgTitle {
+.title {
 	text-align: left;
 	padding: 10px 10px;
 	border-bottom: 1px solid black;
@@ -89,7 +91,7 @@ th {
 }
 
 tr:hover {
-	background-color: #f5f5f5;
+	background-color: silver;
 }
 
 td {
@@ -102,4 +104,15 @@ td {
 	height: 50px;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 0.8em;
+}
+
+footer {
+	font-family: 'Julius Sans One', sans-serif;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	position: fixed;
+	text-align: left;
+	left: 0;
+	bottom: 0;
+	width: 100%;
 }
