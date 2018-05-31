@@ -36,7 +36,7 @@ header {
 	padding-left: 10px;
 }
 
-#draft, #sent, #contacts, #spam, #trash, #chat {
+.nav {
 	font-size: 0.5em;
 	font-family: 'Julius Sans One', sans-serif;
 	display: inline-block;
